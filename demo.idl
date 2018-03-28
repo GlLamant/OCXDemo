@@ -1,0 +1,53 @@
+// demo.idl : ActiveX 控件项目的类型库源。
+
+// 此文件将由 MIDL 编译器工具处理以
+// 产生类型库(demo.tlb)，该类型库将成为
+// demo.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(C656C404-C4FC-4D38-AC8D-E54A59FC3932), version(1.0),
+  control ]
+library demoLib
+{
+	importlib(STDOLE_TLB);
+
+	//  CdemoCtrl 的主调度接口
+	[ 
+		uuid(21DADA62-0A40-41B0-85D9-7BD3A2942495)	
+	]
+	dispinterface _Ddemo
+	{
+		properties:
+			[id(DISPID_READYSTATE), readonly] long ReadyState;
+		methods:
+			[id(1)] void function();
+	};
+
+	//  CdemoCtrl 的事件调度接口
+
+	[ 
+		uuid(F1278A1D-32C6-4DCB-9CD3-1FAD2B14B8F1)	
+	]
+	dispinterface _DdemoEvents
+	{
+		properties:
+			//  事件接口没有任何属性
+
+		methods:
+			[id(DISPID_READYSTATECHANGE)] void ReadyStateChange();
+			[id(1)] void event1();
+	};
+
+	//  CdemoCtrl 的类信息
+	[
+		uuid(4CA8F922-CB1E-4051-BCC5-23EEB4C2B302)
+	]
+	coclass demo
+	{
+		[default] dispinterface _Ddemo;
+		[default, source] dispinterface _DdemoEvents;
+	};
+
+};
